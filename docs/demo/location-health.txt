@@ -1,5 +1,5 @@
-  code     name                     reviews  awaiting_response  overdue  low_rating_open  imported_average  latest_export           
+  code     name                     reviews  awaiting_response  overdue  low_rating_open  imported_average  latest_export
   -------  -----------------------  -------  -----------------  -------  ---------------  ----------------  ------------------------
   HARBOUR  Harbour Learning Centre  4        3                  3        2                3.00              2026-11-01T00:00:00.000Z
-  HILL     Hill Learning Centre     0        0                  0        0                                                          
+  HILL     Hill Learning Centre     0        0                  0        0
   RIVER    River Learning Centre    4        4                  4        2                3.00              2026-11-01T00:00:00.000Z
