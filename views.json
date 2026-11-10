@@ -1,13 +1,36 @@
 [
   {
     "name": "week",
-    "title": "This week",
-    "subtitle": "Review Desk for Claude Code: what needs attention, rendered by npm run view",
+    "title": "Review response desk",
+    "subtitle": "Synthetic demo records. Imported snapshots, not a live platform feed.",
     "sections": [
       {
-        "title": "Needs attention",
-        "note": "TODO(author): point this at the industry's attention view (overdue, stuck, quiet).",
-        "sql": "select 'replace me' as item, 'TODO(author)' as why"
+        "title": "Responses to prepare",
+        "sql": "select location,external_id as review,rating,owner,due_on,overdue_days,next_step from v_response_queue order by overdue_days desc,location,external_id"
+      },
+      {
+        "title": "Location health",
+        "sql": "select code as location,reviews,awaiting_response,overdue,low_rating_open,imported_average from v_location_health order by code",
+        "note": "Average and counts cover imported records only. They are not the live platform rating."
+      },
+      {
+        "title": "Service actions",
+        "sql": "select l.code location,a.title,a.owner,a.due_on,a.status from actions a join reviews r on r.id=a.review_id join locations l on l.id=r.location_id order by due_on"
+      }
+    ]
+  },
+  {
+    "name": "integrity",
+    "title": "Review integrity and privacy checks",
+    "subtitle": "Recorded checks for a human review. No finding establishes whether a review is genuine.",
+    "sections": [
+      {
+        "title": "Evidence needing attention",
+        "sql": "select location,rule,issue from v_compliance order by location,rule"
+      },
+      {
+        "title": "Export coverage",
+        "sql": "select code,latest_export from v_location_health order by code"
       }
     ]
   }

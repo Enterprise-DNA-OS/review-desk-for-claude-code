@@ -1,0 +1,6 @@
+Review ID,Review Site,Reviewer,Rating,Review Date,Review Text,Review URL,Response,Status,Notes
+DEMO-1,Google,Alex R,2,2026-10-20,"The evening class was cancelled, but nobody called.",https://example.org/reviews/1,,New,Check cancellation notice
+DEMO-2,Google,Sam T,5,2026-10-22,"Helpful tutors and clear instructions.",https://example.org/reviews/2,Thank you for sharing your experience.,Responded,Source response needs reconciliation
+DEMO-3,First party,Casey P,1,2026-10-25,"I am still waiting for the course materials.",https://example.org/reviews/3,,Flagged,Check delivery record
+DEMO-4,First party,Jo K,4,2026-10-27,"Good workshop.
+The room was difficult to find.",https://example.org/reviews/4,,New,Directions issue

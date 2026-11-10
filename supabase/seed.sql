@@ -1,0 +1,4 @@
+insert into locations(id,code,name,owner,response_days,policy_url,security_evidence,policy_review_on,retention_review_on,purpose) values
+ ('10000000-0000-4000-8000-000000000001','HARBOUR','Harbour Learning Centre','Rae Morgan',3,'https://example.org/review-policy','Synthetic access review record',current_date+30,current_date+180,'Respond to and investigate service reviews'),
+ ('10000000-0000-4000-8000-000000000002','RIVER','River Learning Centre','Jules Chen',2,'','',current_date-10,current_date-2,'Respond to and investigate service reviews'),
+ ('10000000-0000-4000-8000-000000000003','HILL','Hill Learning Centre','Rae Morgan',3,'https://example.org/review-policy','Synthetic access review record',current_date+30,current_date+180,'Respond to and investigate service reviews') on conflict do nothing;

@@ -1,11 +1,52 @@
 [
   {
-    "name": "example",
-    "title": "TODO(author): the first document this industry must produce",
-    "for_each": "select gen_random_uuid() as id, 'Example' as name",
-    "file": "name",
+    "name": "location-report",
+    "title": "Location review report",
+    "for_each": "select id,code from locations order by code",
+    "file": "code",
     "sections": [
-      { "title": "Details", "sql": "select 'replace me' as item, $1::text as record_id" }
+      {
+        "title": "Review policy",
+        "layout": "record",
+        "sql": "select name,owner,purpose,policy_url,policy_review_on,retention_review_on from locations where id=$1"
+      },
+      {
+        "title": "All imported ratings",
+        "sql": "select external_id as review,platform,rating,reviewed_on,disposition,owner from v_reviews where location_id=$1 order by reviewed_on,external_id",
+        "note": "Every imported review is included regardless of rating or response decision. This report is an internal snapshot."
+      },
+      {
+        "title": "Open service actions",
+        "sql": "select a.title,a.owner,a.due_on,a.evidence from actions a join reviews r on r.id=a.review_id where r.location_id=$1 and a.status='open' order by a.due_on"
+      }
+    ]
+  },
+  {
+    "name": "response-record",
+    "title": "Review response evidence",
+    "for_each": "select id,external_id from reviews order by id",
+    "file": "external_id",
+    "sections": [
+      {
+        "title": "Original review",
+        "layout": "record",
+        "sql": "select location_name,platform,external_id,reviewer,rating,body,reviewed_on,review_url,sequence from v_reviews where id=$1"
+      },
+      {
+        "title": "Response decision",
+        "layout": "record",
+        "sql": "select owner,disposition,coalesce(nullif(disposition_reason,''),'No closing decision') disposition_reason,coalesce(nullif(source_reply,''),'None in current export') source_reply,coalesce(reply,'Not drafted') reply,coalesce(reply_author,'Not recorded') reply_author,coalesce(approved_by,'Not approved') approved_by,coalesce(posted_at::text,'Not recorded') posted_at,coalesce(posted_url,'Not recorded') posted_url from v_reviews where id=$1",
+        "note": "Source replies and locally approved replies are separate. A posting record is an operator assertion, not a platform receipt."
+      },
+      {
+        "title": "Integrity assessment",
+        "layout": "record",
+        "sql": "select coalesce(finding,'Not assessed') finding,coalesce(relationship,'Not assessed') relationship,coalesce(incentive,'Not assessed') incentive,coalesce(assessment_evidence,'No evidence recorded') assessment_evidence from v_reviews where id=$1"
+      },
+      {
+        "title": "Decision history",
+        "sql": "select actor,action,created_at from events where review_id=$1 order by created_at,id"
+      }
     ]
   }
 ]

@@ -1,0 +1,12 @@
+{
+  "external_id": "Review ID",
+  "platform": "Review Site",
+  "reviewer": "Reviewer",
+  "rating": "Rating",
+  "reviewed_on": "Review Date",
+  "body": "Review Text",
+  "review_url": "Review URL",
+  "source_reply": "Response",
+  "source_status": "Status",
+  "source_notes": "Notes"
+}

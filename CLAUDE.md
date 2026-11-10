@@ -1,43 +1,55 @@
-# Review Desk for Claude Code: operating instructions
+# Review Desk for Claude Code
 
-This file is the brain. Claude Code reads it at the start of every session. It says who this is for, how work gets done, and the one right way to do each recurring job.
+Run the daily response desk for a portfolio of locations. Use the database before answering. This is a trusted operator workspace, not a public review platform or shared identity service.
 
-## Who this is for
+## One route per job
 
-- **Business:** [YOUR BUSINESS]
-- **Operator:** [YOUR NAME], [your role]
-- **What matters most:** [the one or two outcomes you care about]
-
-Fill this in once. A worker with context knows. A worker without it guesses.
-
-## How to work
-
-1. **Take a brief, not a script.** The operator describes the outcome. You run the right command and present the answer.
-2. **Read before you write.** Before drafting anything about a record, read its full history first.
-3. **Plain language.** Short sentences. No filler. Numbers in tables.
-4. **Silent success, loud problems.** No play-by-play. Say what broke and what you did about it.
-5. **Stop at the line.** Anything that sends, deletes, or faces a customer waits for a yes in this session.
-
-## Routing table: one right way for each recurring job
-
-| When the operator asks for... | Use this |
+| Job | Recipe |
 |---|---|
-| <!-- TODO(author): one row per slash command --> | `/...` |
+| locations | .claude/commands/locations.md |
+| reviews | .claude/commands/reviews.md |
+| response-queue | .claude/commands/response-queue.md |
+| location-health | .claude/commands/location-health.md |
+| owner-load | .claude/commands/owner-load.md |
+| attention | .claude/commands/attention.md |
+| compliance | .claude/commands/compliance.md |
+| actions | .claude/commands/actions.md |
+| imports | .claude/commands/imports.md |
+| source-freshness | .claude/commands/source-freshness.md |
+| audit | .claude/commands/audit.md |
+| weekly-review | .claude/commands/weekly-review.md |
+| detail | .claude/commands/detail.md |
+| history | .claude/commands/history.md |
+| add-location | .claude/commands/add-location.md |
+| policy | .claude/commands/policy.md |
+| assign | .claude/commands/assign.md |
+| assess | .claude/commands/assess.md |
+| no-response | .claude/commands/no-response.md |
+| reopen | .claude/commands/reopen.md |
+| reconcile-response | .claude/commands/reconcile-response.md |
+| draft-reply | .claude/commands/draft-reply.md |
+| approve-reply | .claude/commands/approve-reply.md |
+| record-posting | .claude/commands/record-posting.md |
+| add-action | .claude/commands/add-action.md |
+| close-action | .claude/commands/close-action.md |
+| log | .claude/commands/log.md |
+| import | .claude/commands/import.md |
+| export | .claude/commands/export.md |
+| docs | .claude/commands/docs.md |
+| view | .claude/commands/view.md |
+| new-view | .claude/commands/new-view.md |
+| customise | .claude/commands/customise.md |
 
-If an ask fits nothing here, run the CLI directly (`npm run <cli> -- --help`) and then propose a new command for it.
+## Operating rules
 
-## Hard rules
+Read docs/replace-grade-us.md before importing, docs/compliance.md before reporting checks, and docs/operations.md before real use. Use npm run reviews -- help for exact options. --actor records a supplied name, not a verified login. Never invent consent, evidence, a review, a reply, an approval or a posting receipt. A different named reviewer must approve the exact current reply. Changed source reviews and newer reply drafts invalidate older approvals.
 
-- Never send email or messages from here. Draft to `drafts/`, a person sends.
-- Never delete records without an explicit yes in this session. Prefer marking closed or archived.
-- Never invent a record. If a name is ambiguous, list the candidates and ask.
-- The database is the source of truth. If the answer is not in it, say so.
+Keep all reviews, including low ratings and no-response decisions, in the evidence. No command deletes reviews, scrapes a platform, asks a customer for a review, sends a message or publishes a reply. Record a manual posting only after the operator supplies its evidence. Never infer completion from an imported status.
 
-## Where things live
+Use synthetic demo data until the owner sets up access, backups and retention. Real exports, replies, reviewer names and reports stay out of Git. No shared customer databases. Read-only HTML is an export, not an access-control boundary.
 
-- `scripts/` the CLI. `scripts/lib/db.mjs` picks `DATABASE_URL` (Postgres, Supabase) or the embedded database in `.data/`.
-- `supabase/migrations/` the schema, plain SQL. `npm run migrate` applies it.
-- `.claude/commands/` the slash commands. Add one every time the same ask comes twice.
-- `docs/` the thesis and the guide for moving off Grade.us.
+## Runtime
 
-Built by Enterprise DNA. Installed and run for you as part of Omni: https://enterprisedna.co/omni/instead-of/grade-us
+Node 20 or newer. PGlite is local; DATABASE_URL selects PostgreSQL. Claude Code, Codex, OpenCode and Cursor use the same commands. brand.json controls reports. New changes belong in numbered migrations, then npm test.
+
+Enterprise DNA installs, customises and operates this through Omni by Enterprise DNA. https://enterprisedna.co/omni/book?offer=replace-software&utm_campaign=grade-us&utm_medium=instructions

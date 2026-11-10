@@ -1,0 +1,9 @@
+  id          location  externa...  rating  owner       due_on      overdue_days  next_step                        
+  ----------  --------  ----------  ------  ----------  ----------  ------------  ---------------------------------
+  061dc45...  RIVER     DEMO-1      2       Jules Chen  2026-10-22  19            needs draft                      
+  d0224c5...  HARBOUR   DEMO-1      2       Rae Morgan  2026-10-23  18            approved, awaiting manual posting
+  53d4ffa...  RIVER     DEMO-2      5       Jules Chen  2026-10-24  17            source reply to reconcile        
+  b50405b...  RIVER     DEMO-3      1       Jules Chen  2026-10-27  14            needs draft                      
+  9efdb85...  HARBOUR   DEMO-3      1       Rae Morgan  2026-10-28  13            needs draft                      
+  072a8b1...  RIVER     DEMO-4      4       Jules Chen  2026-10-29  12            needs draft                      
+  d014d89...  HARBOUR   DEMO-4      4       Rae Morgan  2026-10-30  11            needs draft
